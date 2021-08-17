@@ -1,0 +1,8 @@
+.showForm{
+    position: absolute;
+    height: 30%;
+    width: 50%;
+    transform: translate(50%,10%);
+    border: solid 1px red;
+    box-shadow: 3px 3px 10px;
+}

@@ -1,25 +1,39 @@
 import React from "react";
+import './UserList.css'
 
 const UserList = (props) => (
-  <table>
+  <div>
+    <div>
       {props.performSearch().length > 0 ? (
-        props.performSearch().map((user) => (
-          <tr key={Math.random()}>
-            <td>姓名:{user.username}</td>
-            <td>年齡:{user.age}</td>
-            <td>內容:{user.contant}</td>
-            <td>
-              <button onClick={() => {props.editRow(user);}}>修改</button>
-              <button onClick={() => props.deleteUser(user.username)}>刪除</button>
-            </td>
-          </tr>
+        props.performSearch().map((user,key) => (
+          <div id='listItem' key={key}>
+            <div id='listLeft'>
+              <div className='tdBtn'>姓名:{user.username}</div>|
+              <div className='tdBtn'>年齡:{user.age}</div>|
+              <div className='tdBtn'>內容:{user.context}</div>
+            </div>
+            <div id='listRight'>
+              <div>
+                <button id='editBtn' onClick={() => {
+                  props.editRow(user);
+                }}>修改
+                </button>
+                <button id='delBtn' onClick={() => props.deleteUser(user.id)}>刪除</button>
+              </div>
+            </div>
+          </div>
         ))
       ) : (
         <tr>
           <td colSpan={4}>沒有任何用戶資料!!</td>
         </tr>
       )}
-  </table>
+    </div>
+    <button onClick={() => {
+      props.addRow();
+    }}>新增
+    </button>
+  </div>
 );
 
 export default UserList;

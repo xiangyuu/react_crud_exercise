@@ -1,51 +1,69 @@
-import React, { useState, Fragment } from "react";
+import React, {useState, Fragment} from "react";
 import AddUserForm from "./forms/AddUserForm";
 import EditUserForm from "./forms/EditUserForm";
 import SearchInput from "./forms/SearchInput";
 import UserList from "./forms/UserList";
+import './App.css'
 
 const App = () => {
   const usersData = [
     {
-      username:'漁夫',
+      id:1,
+      username: '漁夫',
       age: "22",
-      contant: "喜歡打籃球",
+      context: "喜歡打籃球",
     },
     {
-      username:'Sular',
+      id:2,
+      username: 'Sular',
       age: "30",
-      contant: "家裡有貓咪",
+      context: "家裡有貓咪",
     }
   ];
 
-  const initUserInfo = {username:'', age:'',contant:''};
+  const initUserInfo = {id: "", username: '', age: '', context: ''};
 
   const [users, setUsers] = useState(usersData);
   const [currentUser, setCurrentUser] = useState(initUserInfo);
+  const [adding, setAdding] = useState(false);
   const [editing, setEditing] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
 
   const addUser = (user) => {
-    setUsers([...users, user]);
+    setUsers([...users, {
+      id: users.length + 1,
+      ...user
+    }]);
   };
 
-  const deleteUser = (username) => {
+  const deleteUser = (id) => {
     setEditing(false);
-    setUsers(users.filter((user) => user.username !== username));
+    setUsers(users.filter((user) => user.id !== id));
   };
 
-  const updateUser = (username, updatedUser) => {
+  const updateUser = (id, updatedUser) => {
     setEditing(false);
-    setUsers(users.map((user) => (user.username === username ? updatedUser : user)));
+    setAdding(false);
+    setUsers(users.map((user) => (user.id === id ? updatedUser : user)));
+  };
+
+  const addRow = () => {
+    setAdding(true);
+    setCurrentUser({
+      username: '',
+      age: 0,
+      context: ''
+    });
   };
 
   const editRow = (user) => {
     setEditing(true);
     setCurrentUser({
+      id: user.id,
       username: user.username,
-      age:user.age,
-      contant:user.contant
+      age: user.age,
+      context: user.context
     });
   };
 
@@ -57,40 +75,49 @@ const App = () => {
     return users.filter(
       (user) =>
         user.age.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.contant.toLowerCase().includes(searchTerm.toLowerCase())||
+        user.context.toLowerCase().includes(searchTerm.toLowerCase()) ||
         user.username.toLowerCase().includes(searchTerm.toLowerCase())
     );
   };
 
   return (
     <div className="container">
-      <SearchInput handleSearch={handleSearch} searchTerm={searchTerm} />
-      <div className="">
+      <SearchInput handleSearch={handleSearch} searchTerm={searchTerm}/>
+      <div className="listInput">
         <UserList
           users={users}
+          addRow={addRow}
           editRow={editRow}
           deleteUser={deleteUser}
           performSearch={performSearch}
         />
       </div>
       <div>
-        {editing ? (
-          <Fragment>
-            <h2>修改</h2>
-            <EditUserForm
-              editing={editing}
-              setEditing={setEditing}
-              currentUser={currentUser}
-              updateUser={updateUser}
-            />
-          </Fragment>
-        ) : (
-          <Fragment>
-            <hr></hr>
-            <AddUserForm addUser={addUser} />
-          </Fragment>
-        )}
+        
+        {editing &&
+        <Fragment>
+          <h2>修改</h2>
+          <EditUserForm
+            editing={editing}
+            setEditing={setEditing}
+            currentUser={currentUser}
+            updateUser={updateUser}
+          />
+        </Fragment>
+        }
+        {adding &&
+        <Fragment>
+          <AddUserForm
+            addUser={addUser}
+            adding={adding}
+            setAdding={setAdding}
+            currentUser={currentUser}
+            updateUser={updateUser}
+          />
+        </Fragment>
+        }
       </div>
+
     </div>
   );
 };

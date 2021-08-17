@@ -17,8 +17,7 @@ const EditUserForm = (props) => {
     <form
       onSubmit={(event) => {
         event.preventDefault();
-
-        props.updateUser(user.username, user);
+        props.updateUser(user.id, user);
       }}
     >
           <div>
@@ -45,8 +44,8 @@ const EditUserForm = (props) => {
             <label>內容</label>
             <input
                 type="text"
-                name="contant"
-                value={user.contant}
+                name="context"
+                value={user.context}
                 onChange={handleInputChange}
                 required
             />

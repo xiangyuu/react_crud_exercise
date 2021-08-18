@@ -28,6 +28,26 @@ const App = () => {
   const [adding, setAdding] = useState(false);
   const [editing, setEditing] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const pageItem=5;
+  const allPages=Math.round(usersData.length/pageItem);
+  const [currentPage,setCurrentPage]=useState(1);
+
+  function nextPage(){
+    setCurrentPage({currentPage:currentPage+1})
+  }
+  function preventPage(){
+    setCurrentPage({currentPage:currentPage-1})
+  }
+  function changePage(e){
+    const thisPage=(e.target.value)
+  }
+  const currentData=()=>{
+    const start=(currentPage-1)*pageItem
+    const end=start+pageItem
+    return usersData.filter(start,end)
+  }
+
+
 
 
   const addUser = (user) => {
@@ -91,9 +111,12 @@ const App = () => {
           deleteUser={deleteUser}
           performSearch={performSearch}
         />
+        
       </div>
       <div>
-        
+        {
+          
+        }
         {editing &&
         <Fragment>
           <h2>修改</h2>

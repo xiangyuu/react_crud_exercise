@@ -1,0 +1,17 @@
+#listItem{
+    display: flex;
+    justify-content: space-between;
+}
+#listLeft{
+    margin-right: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#listLeft{
+    display: flex;
+    align-items: center;
+}
+.tdBtn{
+    margin:0 3px;
+}

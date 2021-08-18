@@ -1,0 +1,10 @@
+#showForm{
+    position: absolute;
+    height: 30%;
+    width: 30%;
+    transform: translate(0,-20%);
+    background-color: palegoldenrod;
+    border: solid 1px red;
+    box-shadow: 3px 3px 10px;
+    z-index: 99;
+}

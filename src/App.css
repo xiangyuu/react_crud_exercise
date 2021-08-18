@@ -1,0 +1,68 @@
+*{
+    list-style: none;
+}
+.container{
+    text-align: center;
+    background-color: bisque;
+    padding: 50px;
+    position: relative;
+    height: 100vh;
+}
+.listInput{
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    background-color:sandybrown;
+    z-index: 9;
+
+}
+.inputBox{
+    margin: 5px 0 ;
+}
+.inputBox:nth-child(1){
+    margin-top: 15%;
+}
+.inputText{
+
+    margin-right:5px;
+}
+#addBtn{
+    background-color:pink;
+    box-shadow: 3px 3px 9px;
+    width: 100px;
+    border-radius: 3px;
+}
+#editBtn{
+    background-color: cornflowerblue;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 3px;
+}
+#delBtn{
+    background-color: red;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 3px;
+}
+#pagenation{
+    border: solid 0px red;
+    background-color:palegoldenrod;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+}
+#pageNum{
+    display: flex;
+    padding: 0 10px;
+
+}
+#preBtn{
+    cursor: pointer;
+}
+#nextBtn{
+    cursor: pointer;
+}
+.page{
+    margin:0 5px;
+    cursor: pointer;
+}
